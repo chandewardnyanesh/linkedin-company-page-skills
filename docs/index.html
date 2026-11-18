@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>LinkedIn Company Page Skills for Claude — 13 open-source AI skills for B2B pages</title>
+<meta name="description" content="13 free, open-source Claude skills for running a LinkedIn company page: website research, content calendars, page posts, authority articles and newsletters, an AI and corporate-voice humanizer, employee advocacy and analytics. No API keys, no dependencies, MIT licensed.">
+<link rel="canonical" href="https://chandewardnyanesh.github.io/linkedin-company-page-skills/">
+<meta name="author" content="Dnyanesh Chandewar">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LinkedIn Company Page Skills">
+<meta property="og:title" content="LinkedIn Company Page Skills for Claude — 13 open-source AI skills">
+<meta property="og:description" content="A company page reaches 1–2% of its own followers. These 13 Claude skills are built for that reality: claim-gated writing, a two-voice humanizer, and the employee amplification layer that actually carries the reach.">
+<meta property="og:url" content="https://chandewardnyanesh.github.io/linkedin-company-page-skills/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LinkedIn Company Page Skills for Claude">
+<meta name="twitter:description" content="13 open-source Claude skills for LinkedIn company pages. Claim-gated writing, a de-AI and de-corporate humanizer, employee advocacy, and honest handling of the surfaces LinkedIn has no API for.">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128202;</text></svg>">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "LinkedIn Company Page Skills",
+      "description": "13 open-source Claude skills for running a LinkedIn company page: brand profile research, page optimisation, trend and competitor intelligence, multi-surface content calendars, page posts, authority articles and newsletters, an AI and corporate-voice humanizer, content repurposing, proof extraction, employee amplification, comment handling and monthly analytics reporting.",
+      "codeRepository": "https://github.com/chandewardnyanesh/linkedin-company-page-skills",
+      "programmingLanguage": "Python",
+      "runtimePlatform": "Claude Code, Claude Desktop, claude.ai",
+      "license": "https://opensource.org/licenses/MIT",
+      "author": {
+        "@type": "Person",
+        "name": "Dnyanesh Chandewar",
+        "url": "https://github.com/chandewardnyanesh"
+      },
+      "keywords": "LinkedIn company page, LinkedIn business page, Claude skills, Claude Code plugin, B2B LinkedIn marketing, LinkedIn content strategy, employee advocacy, LinkedIn newsletter, thought leadership, brand voice, AI content humanizer"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is this for personal LinkedIn profiles or company pages?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Company pages specifically. The formats, voice constraints, claim liability and distribution model are all different from personal profiles. A personal post can use a confession hook; a company has no self to confess with. What a page has instead is access a person does not have: aggregate numbers, the thing that broke in production, the pattern across forty clients."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it post to LinkedIn automatically?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not by default, and for LinkedIn articles and newsletters not at all, because LinkedIn exposes no publishing API for either. Page posts, document posts and comments can be automated with the w_organization_social scope and an admin role by wiring up your own poster command. Everything passes through a human approval card first."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need an API key, a scraper or a paid tool?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. There are no dependencies, the library is Python standard library only, and the default path makes no network call. Google Search Console, Ahrefs and Semrush connectors are used if you already have them, to replace inferred search demand with measured demand."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will this make AI-written LinkedIn posts undetectable?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, and the project does not claim it. No edit reliably beats a trained classifier, and detector scores shift between model generations. What the rules do is make copy specific, attributable and checkable, which is what a human reader responds to."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can it write a LinkedIn newsletter for a company page?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The authority-article-writer skill drafts newsletter issues and checks eligibility first: Super Admin permission, at least 150 followers, an active page with recent posts, and a history of original content. Publishing is manual because no API exists. A newsletter matters because subscribers are notified by email, making it the only company page surface whose delivery does not depend on the feed algorithm."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does a LinkedIn company page get so little reach in 2026?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Company page organic reach sits at roughly 1 to 2 percent of followers, down 60 to 66 percent between 2024 and early 2026. Personal profiles take around 65 percent of feed distribution against about 5 percent for pages, and employee posts carry roughly 561 percent more reach per post than page content. The practical consequence is that a company page is a credibility and conversion asset rather than a reach channel, and its distribution has to be borrowed from employees, newsletters and paid placement."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+:root{
+  --bg:#0d1117; --surface:#161b22; --surface2:#1c2128; --line:#30363d;
+  --fg:#e6edf3; --muted:#9198a1; --accent:#7c6cf0; --accent2:#2f81f7;
+  --good:#3fb950; --warn:#d29922; --bad:#f85149;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme: light){
+  :root{--bg:#ffffff;--surface:#f6f8fa;--surface2:#eef1f4;--line:#d0d7de;
+        --fg:#1f2328;--muted:#59636e;--accent:#5a43e0;--accent2:#0969da;}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);
+     font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:880px;margin:0 auto;padding:0 22px}
+a{color:var(--accent2);text-decoration:none}
+a:hover{text-decoration:underline}
+code{font-family:var(--mono);font-size:.88em;background:var(--surface2);
+     padding:.15em .4em;border-radius:5px}
+pre{background:var(--surface);border:1px solid var(--line);border-radius:10px;
+    padding:16px;overflow-x:auto;font-size:14px;line-height:1.55}
+pre code{background:none;padding:0;font-size:inherit}
+h1,h2,h3{line-height:1.25;letter-spacing:-.02em}
+h1{font-size:clamp(2rem,5vw,2.9rem);margin:0 0 14px;font-weight:800}
+h2{font-size:clamp(1.4rem,3.4vw,1.85rem);margin:56px 0 16px;font-weight:700;
+   padding-bottom:9px;border-bottom:1px solid var(--line)}
+h3{font-size:1.14rem;margin:30px 0 10px;font-weight:650}
+
+header{padding:72px 0 44px;border-bottom:1px solid var(--line);
+       background:radial-gradient(1100px 380px at 18% -12%,rgba(124,108,240,.17),transparent)}
+.lede{font-size:1.19rem;color:var(--muted);max-width:66ch;margin:0 0 22px}
+.lede strong{color:var(--fg)}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 26px}
+.badge{font-family:var(--mono);font-size:12px;padding:4px 10px;border-radius:999px;
+       background:var(--surface);border:1px solid var(--line);color:var(--muted)}
+.badge.on{color:var(--good);border-color:color-mix(in srgb,var(--good) 40%,var(--line))}
+.cta{display:flex;flex-wrap:wrap;gap:11px}
+.btn{display:inline-block;padding:11px 20px;border-radius:9px;font-weight:600;font-size:15px;
+     border:1px solid var(--line);background:var(--surface);color:var(--fg)}
+.btn:hover{text-decoration:none;border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{filter:brightness(1.12)}
+
+.callout{background:var(--surface);border:1px solid var(--line);
+         border-left:3px solid var(--accent);border-radius:10px;padding:18px 20px;margin:26px 0}
+.callout.warn{border-left-color:var(--warn)}
+.callout p:last-child{margin-bottom:0}
+.callout p:first-child{margin-top:0}
+
+table{width:100%;border-collapse:collapse;margin:22px 0;font-size:15px;display:block;overflow-x:auto}
+th,td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12.5px;text-transform:uppercase;letter-spacing:.055em;color:var(--muted);font-weight:650}
+tbody tr:hover{background:var(--surface)}
+td.num{font-family:var(--mono);white-space:nowrap}
+.down{color:var(--bad);font-weight:650}
+.up{color:var(--good);font-weight:650}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:13px;margin:22px 0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:17px}
+.card h4{margin:0 0 7px;font-size:14.5px;font-family:var(--mono);color:var(--accent)}
+.card p{margin:0;font-size:14.5px;color:var(--muted);line-height:1.55}
+
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px;
+        padding:14px 18px;margin:11px 0}
+details[open]{background:var(--surface2)}
+summary{cursor:pointer;font-weight:620;font-size:16px}
+summary::marker{color:var(--accent)}
+details p{margin:12px 0 0;color:var(--muted);font-size:15.5px}
+
+footer{margin-top:76px;padding:36px 0 52px;border-top:1px solid var(--line);
+       color:var(--muted);font-size:14.5px}
+.kw{font-size:12.5px;color:var(--muted);opacity:.62;margin-top:22px;line-height:1.6}
+ul{padding-left:22px}
+li{margin:7px 0}
+.src{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header>
+<div class="wrap">
+  <h1>LinkedIn Company Page Skills for Claude</h1>
+  <p class="lede"><strong>13 open-source Claude skills</strong> for running a
+  LinkedIn company page: website research, content calendars, page posts,
+  authority articles and newsletters, an AI <em>and</em> corporate-voice
+  humanizer, employee advocacy, and monthly analytics.</p>
+  <p class="lede">Built for the fact most LinkedIn advice ignores:
+  <strong>a company page reaches 1–2% of its own followers.</strong></p>
+  <div class="badges">
+    <span class="badge">MIT licensed</span>
+    <span class="badge on">zero dependencies</span>
+    <span class="badge on">no API key</span>
+    <span class="badge">13 skills</span>
+    <span class="badge">Claude Code · Desktop · claude.ai</span>
+  </div>
+  <div class="cta">
+    <a class="btn primary" href="https://github.com/chandewardnyanesh/linkedin-company-page-skills">View on GitHub</a>
+    <a class="btn" href="#install">Install</a>
+    <a class="btn" href="#skills">The 13 skills</a>
+  </div>
+</div>
+</header>
+
+<main class="wrap">
+
+<h2 id="why">Why company pages need their own skills</h2>
+
+<p>A LinkedIn company page is <strong>not a reach channel</strong>. It is an
+authority and conversion asset whose distribution has to be borrowed from
+people. The 2026 data, from several independent directions:</p>
+
+<table>
+<thead><tr><th>Measure</th><th>Company page</th><th>Personal profile</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Median engagement rate</td><td class="num">1–2%</td><td class="num">~4.7%</td><td class="src">Sprout Social Q1 2026 Index, 52M+ posts</td></tr>
+<tr><td>Share of feed distribution</td><td class="num">~5%</td><td class="num">~65%</td><td class="src">SocialPilot, Sept 2026</td></tr>
+<tr><td>Organic reach vs followers</td><td class="num">~1.2%</td><td class="num">8–15%</td><td class="src">SMM News 2026, 524 B2B pages</td></tr>
+<tr><td>Reach change 2024 → 2026</td><td class="num down">−60 to −66%</td><td class="num">~−50%</td><td class="src">multiple 2026 roundups</td></tr>
+<tr><td>Median reactions, B2B post</td><td class="num">23</td><td class="num">39</td><td class="src">Imagine AI, Oct 2026</td></tr>
+<tr><td>Reach per post vs employee posts</td><td class="num">baseline</td><td class="num up">+561%</td><td class="src">SocialPilot, Sept 2026</td></tr>
+</tbody>
+</table>
+
+<p>So a page with 20,000 followers can reach fewer people than a founder with
+2,000. <strong>Any content plan whose growth depends on page post volume does
+not work.</strong></p>
+
+<div class="callout">
+<p><strong>This is also why a personal-brand skill bundle cannot simply be
+pointed at a company page.</strong> The personal formula libraries are built on
+devices a brand cannot use honestly — a confession hook needs someone to
+confess, and a company has no self. The attempt produces the worst genre on the
+platform: a corporate entity performing feelings.</p>
+<p>What a page has instead is <strong>access a person does not have</strong>:
+the whole book of business, the aggregate numbers, the thing that broke in
+production, the pattern across forty clients, the real cost of the work. A
+person can report their own experience. A page can report a population. Every
+format in this project is a way of spending that advantage.</p>
+</div>
+
+<h3>The four jobs a company page actually does well</h3>
+<ul>
+<li><strong>Pass the credibility check</strong> — the buyer who met you
+elsewhere and opened the page before replying. Small, late-funnel, the most
+valuable traffic the account gets.</li>
+<li><strong>Hold the assets that get borrowed</strong> — carousels, articles
+and research that employees reshare.</li>
+<li><strong>Own distribution the feed cannot throttle</strong> — a LinkedIn
+newsletter notifies subscribers by email.</li>
+<li><strong>Convert</strong> — custom button, lead-gen forms, Products and
+Services tabs.</li>
+</ul>
+
+<h2 id="install">Installation</h2>
+
+<p>No API keys, no signup, no Python packages. Python 3.10+ for the helper
+scripts.</p>
+
+<pre><code>git clone https://github.com/chandewardnyanesh/linkedin-company-page-skills.git
+cd linkedin-company-page-skills
+python -m scripts.selftest      # 19 checks, offline</code></pre>
+
+<p>Then add the cloned directory as a plugin marketplace in <strong>Claude
+Code</strong> — the repo ships <code>.claude-plugin/marketplace.json</code>. For
+<strong>Claude Desktop</strong> or <strong>claude.ai</strong>, upload any
+individual <code>skills/&lt;name&gt;/SKILL.md</code>, or the whole directory
+where your plan supports plugins. Each skill works standalone.</p>
+
+<p><strong>Optional:</strong> Google Search Console, Ahrefs or Semrush
+connectors replace inferred search demand with measured demand in
+<code>trend-radar</code> and <code>page-performance-report</code>. Without
+them, those skills label their evidence as observed and say so.</p>
+
+<h2 id="skills">The 13 skills</h2>
+
+<h3>Setting up</h3>
+<div class="grid">
+<div class="card"><h4>page-profile-builder</h4><p>Crawls the company website and LinkedIn page, writes the canonical brand profile, proof library, ICP and competitor set every other skill reads. Run this first.</p></div>
+<div class="card"><h4>page-optimizer</h4><p>Audits and rewrites the page itself — tagline (120 chars), About (2,000 chars), specialties, custom button, Products and Services tabs, Featured, Life tab.</p></div>
+</div>
+
+<h3>Deciding what to say</h3>
+<div class="grid">
+<div class="card"><h4>trend-radar</h4><p>Ranked content opportunities with graded evidence — measured, observed or inferred, never conflated.</p></div>
+<div class="card"><h4>competitor-page-analyzer</h4><p>Competitor cadence, format mix, newsletters, employees posting — and the white space you have standing to own.</p></div>
+<div class="card"><h4>page-content-calendar</h4><p>A 30-day multi-surface plan built on real capacity rather than a posting target.</p></div>
+</div>
+
+<h3>Writing</h3>
+<div class="grid">
+<div class="card"><h4>page-post-writer</h4><p>Page posts across 16 brand formats — proof ledger, build log, teardown, original data drop, honest no, post-mortem, comparison table — picked by the job the post has to do.</p></div>
+<div class="card"><h4>authority-article-writer</h4><p>LinkedIn Articles and newsletter issues across 8 authority architectures, with newsletter eligibility checked first.</p></div>
+<div class="card"><h4>page-humanizer</h4><p>Strips AI tells and press-release voice. <code>--mode audit</code> runs a six-gate pre-publish review including claim clearance.</p></div>
+</div>
+
+<h3>Reusing what exists</h3>
+<div class="grid">
+<div class="card"><h4>page-repurposer</h4><p>One source into several native assets — blog to carousel, webinar to posts, a founder's personal post to a page version.</p></div>
+<div class="card"><h4>page-asset-extractor</h4><p><code>--mode pattern</code> deconstructs any high-performing post. <code>--mode proof</code> mines documents for the claims you are entitled to make.</p></div>
+</div>
+
+<h3>Distribution and inbound</h3>
+<div class="grid">
+<div class="card"><h4>employee-amplification</h4><p>Per-person reshare kits with distinct angles, the once-a-week notify budget, Thought Leader Ad selection. This is the distribution layer.</p></div>
+<div class="card"><h4>page-engagement-desk</h4><p>Comment replies, complaint triage and escalation, commenting as the page.</p></div>
+</div>
+
+<h3>Measuring</h3>
+<div class="grid">
+<div class="card"><h4>page-performance-report</h4><p>A monthly report that says what to change, measured against your own baseline rather than borrowed benchmarks.</p></div>
+</div>
+
+<h2 id="design">Three design decisions</h2>
+
+<h3>1. No figure publishes without a cleared proof row</h3>
+<p>A number on a company page is a representation the business made, in public,
+with a timestamp, to an audience that includes its customers and its
+competitors. It gets screenshotted before it gets corrected.</p>
+<p>So every writing skill stops at a claim with no entry in the proof library. A
+format's <code>[specific number]</code> slot is <strong>not</strong> a licence
+to produce a plausible one — plausible is fabricated. When the library has
+nothing that fits, the skill asks, drops the claim, or changes format. It does
+not soften an unevidenced number into "up to".</p>
+
+<h3>2. The humanizer fixes two voices, not one</h3>
+<p>Brand copy sounds like AI <strong>and</strong> like a press release, and the
+two reinforce each other because they share most of their tells. Two tests on
+every opening line:</p>
+<ul>
+<li><strong>Swap in a competitor's name.</strong> Survives? It says nothing.
+→ press-release voice</li>
+<li><strong>Swap in a different industry.</strong> Survives? Cut it. → AI voice</li>
+</ul>
+<p>Both resolve the same way, and it is not word substitution — "utilise" for
+"leverage" is the same empty slot with a different word in it. The fix is a
+named person, a specific number, or a dated event.</p>
+
+<h3>3. Manual publishing is the honest answer, not a missing feature</h3>
+
+<table>
+<thead><tr><th>Surface</th><th>Publishable by API?</th></tr></thead>
+<tbody>
+<tr><td>Page post, document post, comment</td><td>Yes — <code>w_organization_social</code> + admin role</td></tr>
+<tr><td><strong>LinkedIn Article</strong> (Articles for Pages)</td><td><strong>No. No publishing API exists</strong></td></tr>
+<tr><td><strong>LinkedIn Newsletter</strong></td><td><strong>No. An extension of articles</strong></td></tr>
+<tr><td>Poll, Event</td><td>No</td></tr>
+<tr><td>Tagline, About, specialties, tabs, Featured</td><td>No</td></tr>
+</tbody>
+</table>
+
+<p>Any tool claiming to automate a LinkedIn article is driving a browser or is
+wrong. This project ships draft-first on every surface and says so plainly
+rather than implying a key would change it.</p>
+
+<div class="callout warn">
+<p>To automate the API-reachable surfaces, export a poster command in a trusted
+shell: <code>export LINKEDIN_PAGE_CUSTOM_POSTER='/path/to/your-poster'</code>.
+The variable is <strong>deliberately ignored inside <code>.env</code>
+files</strong> — a file on disk choosing which executable runs is a
+code-execution hole dressed as configuration.</p>
+</div>
+
+<h2 id="faq">Frequently asked questions</h2>
+
+<details><summary>Is this for personal LinkedIn profiles or company pages?</summary>
+<p>Company pages specifically. The formats, voice constraints, claim liability
+and distribution model are all different. For personal-profile work, see
+<a href="https://github.com/sergebulaev/linkedin-skills">sergebulaev/linkedin-skills</a>,
+whose structural conventions this project follows.</p></details>
+
+<details><summary>Does it post to LinkedIn automatically?</summary>
+<p>Not by default, and for articles and newsletters not at all — LinkedIn has
+no publishing API for either. Page posts and comments can be automated by
+wiring up your own poster command. Everything passes through a human approval
+card first.</p></details>
+
+<details><summary>Do I need an API key, a scraper or a paid tool?</summary>
+<p>No. There are no dependencies, the library is Python standard library only,
+and the default path makes no network call.</p></details>
+
+<details><summary>Will this make AI-written posts undetectable?</summary>
+<p>No, and the project does not claim it. No edit reliably beats a trained
+classifier, and detector scores shift between model generations. What the rules
+do is make copy specific, attributable and checkable, which is what a human
+reader responds to.</p></details>
+
+<details><summary>Can it write a LinkedIn newsletter for a company page?</summary>
+<p>Yes, and it checks eligibility first: Super Admin permission, at least 150
+followers, an active page with recent posts, and a history of original content.
+Publishing is manual because no API exists. A newsletter matters because
+subscribers are notified by email, making it the only page surface whose
+delivery does not depend on the feed algorithm.</p></details>
+
+<details><summary>How is this different from asking Claude to "write a LinkedIn post"?</summary>
+<p>Three things. It refuses to invent statistics about your business. It picks a
+format based on the job the post has to do rather than defaulting to a hook. And
+it plans the employee amplification without which a page post reaches almost
+nobody.</p></details>
+
+<details><summary>Does it work for non-English pages?</summary>
+<p>The voice rules and formats are language-agnostic in structure, and the
+company profile records the publishing language. The banned-vocabulary lists are
+English; contributions for other languages are welcome.</p></details>
+
+<details><summary>Is it safe to point at my company website?</summary>
+<p>Yes. Everything fetched is treated as data, never as instructions, and a
+figure found on your own website is not treated as evidence until a human clears
+it — which is how stale claims get republished with fresh timestamps.</p></details>
+
+<h2 id="limits">What this project does not claim</h2>
+<ul>
+<li><strong>It does not beat AI detectors.</strong> No edit reliably does, and
+claiming otherwise would be dishonest.</li>
+<li><strong>It does not promise reach.</strong> Every benchmark above measures
+someone else's corpus, most of it vendor data with a proprietary score behind
+it. Your own trailing baseline beats all of them.</li>
+<li><strong>It does not attribute revenue to posts.</strong> A company page
+cannot show which post produced a deal, and the reporting skill says so in
+every report rather than modelling what the data will not support.</li>
+<li><strong>It does not automate LinkedIn articles or newsletters.</strong>
+Nothing can.</li>
+</ul>
+
+<div class="cta" style="margin-top:34px">
+  <a class="btn primary" href="https://github.com/chandewardnyanesh/linkedin-company-page-skills">Get it on GitHub</a>
+  <a class="btn" href="https://github.com/chandewardnyanesh/linkedin-company-page-skills/issues">Report an issue</a>
+</div>
+
+</main>
+
+<footer class="wrap">
+<p>MIT licensed. Built by
+<a href="https://github.com/chandewardnyanesh">Dnyanesh Chandewar</a>.
+Structural conventions follow
+<a href="https://github.com/sergebulaev/linkedin-skills">sergebulaev/linkedin-skills</a> (MIT).</p>
+<p>Platform limits and benchmarks were observed in 2026. LinkedIn changes both
+without notice — corrections via pull request are welcome.</p>
+<p class="kw">LinkedIn company page · LinkedIn business page · Claude skills ·
+Claude Code plugin · LinkedIn content strategy · B2B LinkedIn marketing ·
+LinkedIn employee advocacy · LinkedIn newsletter · LinkedIn document carousel ·
+thought leadership · brand voice guidelines · AI content humanizer · LinkedIn
+page analytics · company page SEO · LinkedIn automation · open source AI skills</p>
+</footer>
+
+</body>
+</html>

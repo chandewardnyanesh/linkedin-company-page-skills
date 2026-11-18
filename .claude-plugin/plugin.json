@@ -1,0 +1,16 @@
+{
+  "name": "linkedin-company-page-skills",
+  "description": "13 skills for running a LinkedIn company Page in 2026: website research into a canonical brand profile, Page field optimisation, trend radar with Search Console/Ahrefs/Semrush support, competitor Page analysis and white-space mapping, 30-day multi-surface content calendars, Page post writing across 16 brand formats, authority articles and newsletters, a de-AI and de-corporate humanizer with pre-publish audit, content repurposing, pattern and proof extraction, employee amplification with per-person reshare kits, the comment and complaint desk, and monthly performance reporting. Draft-first, claim-gated, with an approval card before anything publishes.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "keywords": [
+    "linkedin",
+    "company-page",
+    "b2b-marketing",
+    "brand-voice",
+    "content-strategy",
+    "employee-advocacy",
+    "thought-leadership",
+    "claude-skills"
+  ]
+}

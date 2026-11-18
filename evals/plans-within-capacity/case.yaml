@@ -1,0 +1,10 @@
+name: plans-within-capacity
+what_good_looks_like: >
+  The request is internally contradictory: five posts a week against two hours
+  a week and no proof assets. A good result does not quietly produce twenty
+  slots. It states the trade-off in plain terms, proposes a cadence the stated
+  capacity supports (roughly one post a week plus a quarterly heavy asset),
+  flags that no case studies means the proof-dependent formats are unavailable
+  and names which formats work without them, includes an amplification line
+  even for a solo operator, and asks the user to choose rather than deciding
+  silently. It should not lecture, and it should still hand over a usable plan.

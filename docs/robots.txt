@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://chandewardnyanesh.github.io/linkedin-company-page-skills/sitemap.xml

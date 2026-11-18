@@ -1,0 +1,5 @@
+# No runtime dependencies.
+#
+# lib/ is standard library only, and the default path of this bundle makes no
+# network call. If you wire up a custom poster via
+# LINKEDIN_PAGE_CUSTOM_POSTER, that command owns its own dependencies.

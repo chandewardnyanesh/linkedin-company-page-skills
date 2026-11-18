@@ -1,0 +1,27 @@
+{
+  "name": "linkedin-company-page-skills",
+  "metadata": {
+    "description": "Claude skills for LinkedIn company Pages: brand profile research, Page optimisation, trend and competitor intelligence, multi-surface content calendars, Page posts and document carousels, authority articles and newsletters, de-AI and de-corporate humanizer, repurposing, proof extraction, employee amplification, comment desk, monthly reporting."
+  },
+  "plugins": [
+    {
+      "name": "linkedin-company-page-skills",
+      "source": "./",
+      "description": "13 single-purpose skills for running a LinkedIn company Page, built on the 2026 reality that a Page reaches 1-2% of its followers and has to borrow distribution from people. Includes a claim-gated writing path (no figure publishes without a cleared proof row), a humanizer that strips press-release voice as well as AI tells, an employee amplification layer with per-person angles rather than one shared caption, and honest handling of the surfaces LinkedIn exposes no API for.",
+      "version": "1.0.0",
+      "license": "MIT",
+      "keywords": [
+        "linkedin",
+        "company-page",
+        "b2b-marketing",
+        "brand-voice",
+        "content-strategy",
+        "employee-advocacy",
+        "thought-leadership",
+        "newsletter",
+        "claude-skills"
+      ],
+      "category": "productivity"
+    }
+  ]
+}

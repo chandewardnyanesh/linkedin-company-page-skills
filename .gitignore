@@ -1,0 +1,14 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+
+# Filled templates are confidential business documents: positioning, pricing
+# posture, customer names, cleared and uncleared claims. The shipped versions
+# are blank. Uncomment the lines for any file you fill in, or keep the filled
+# copy outside the repo entirely.
+# references/company-profile.md
+# references/proof-library.md
+# references/claims-and-compliance.md
+# references/icp-firmographics.md
+# references/competitor-set.md
