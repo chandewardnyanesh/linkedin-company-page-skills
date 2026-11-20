@@ -1,7 +1,7 @@
 {
   "name": "linkedin-company-page-skills",
-  "description": "13 skills for running a LinkedIn company Page in 2026: website research into a canonical brand profile, Page field optimisation, trend radar with Search Console/Ahrefs/Semrush support, competitor Page analysis and white-space mapping, 30-day multi-surface content calendars, Page post writing across 16 brand formats, authority articles and newsletters, a de-AI and de-corporate humanizer with pre-publish audit, content repurposing, pattern and proof extraction, employee amplification with per-person reshare kits, the comment and complaint desk, and monthly performance reporting. Draft-first, claim-gated, with an approval card before anything publishes.",
-  "version": "1.0.0",
+  "description": "13 skills for running a LinkedIn company Page: website research into a brand profile, Page optimisation, trend radar, competitor analysis, content calendars, Page posts across 16 brand formats, authority articles and newsletters, a de-AI and de-corporate humanizer, repurposing, proof extraction, employee amplification, the comment desk and monthly reporting. Use for LinkedIn content for a business, brand or client Page, not a personal profile. Draft-first and claim-gated.",
+  "version": "1.0.1",
   "license": "MIT",
   "keywords": [
     "linkedin",
@@ -12,5 +12,7 @@
     "employee-advocacy",
     "thought-leadership",
     "claude-skills"
-  ]
+  ],
+  "homepage": "https://chandewardnyanesh.github.io/linkedin-company-page-skills/",
+  "repository": "https://github.com/chandewardnyanesh/linkedin-company-page-skills"
 }

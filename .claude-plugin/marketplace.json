@@ -8,7 +8,7 @@
       "name": "linkedin-company-page-skills",
       "source": "./",
       "description": "13 single-purpose skills for running a LinkedIn company Page, built on the 2026 reality that a Page reaches 1-2% of its followers and has to borrow distribution from people. Includes a claim-gated writing path (no figure publishes without a cleared proof row), a humanizer that strips press-release voice as well as AI tells, an employee amplification layer with per-person angles rather than one shared caption, and honest handling of the surfaces LinkedIn exposes no API for.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "license": "MIT",
       "keywords": [
         "linkedin",

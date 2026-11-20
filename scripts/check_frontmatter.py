@@ -40,6 +40,52 @@ def parse_frontmatter(text: str) -> dict[str, str] | None:
     return data
 
 
+def check_plugin_manifests(failures: list[str]) -> int:
+    """Validate the plugin manifests against the host's own limits.
+
+    claude.ai rejects a plugin whose description exceeds 500 characters, and it
+    rejects it at upload time with a validation error rather than truncating.
+    That is a long way from where the description is written, so the limit is
+    worth enforcing here instead of discovering it in a browser.
+    """
+    import json
+
+    checked = 0
+    limit = 500
+    for rel in (".claude-plugin/plugin.json", ".claude-plugin/marketplace.json"):
+        path = ROOT / rel
+        if not path.is_file():
+            continue
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            failures.append(f"{rel}: invalid JSON — {exc}")
+            continue
+
+        entries: list[tuple[str, str]] = []
+        if isinstance(data.get("description"), str):
+            entries.append(("description", data["description"]))
+        if isinstance(data.get("metadata"), dict) and isinstance(
+            data["metadata"].get("description"), str
+        ):
+            entries.append(("metadata.description", data["metadata"]["description"]))
+        for plugin in data.get("plugins", []) or []:
+            if isinstance(plugin.get("description"), str):
+                entries.append((f"plugins[{plugin.get('name', '?')}].description", plugin["description"]))
+
+        for label, text in entries:
+            checked += 1
+            if len(text) > limit:
+                failures.append(
+                    f"{rel}: {label} is {len(text)} characters, "
+                    f"{len(text) - limit} over the {limit}-character limit. "
+                    "claude.ai refuses the plugin at upload rather than truncating."
+                )
+            elif not text.strip():
+                failures.append(f"{rel}: {label} is empty")
+    return checked
+
+
 def main() -> int:
     targets = sorted(ROOT.glob("skills/*/SKILL.md")) + [ROOT / "SKILL.md"]
     failures: list[str] = []
@@ -84,9 +130,14 @@ def main() -> int:
                 "Move detail into references/ and point at it."
             )
 
+    manifest_fields = check_plugin_manifests(failures)
+
     for failure in failures:
         print(f"FAIL  {failure}")
-    print(f"\nchecked {checked} skill files, {len(failures)} problem(s)")
+    print(
+        f"\nchecked {checked} skill files and {manifest_fields} manifest field(s), "
+        f"{len(failures)} problem(s)"
+    )
     return 1 if failures else 0
 
 

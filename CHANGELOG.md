@@ -4,6 +4,24 @@ All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); this project uses
 [semantic versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] — 2026-11-20
+
+### Fixed
+
+- **`plugin.json` description was 658 characters, over the 500-character limit
+  claude.ai enforces.** The plugin was rejected at upload with a validation
+  error rather than being truncated. Rewritten to 476 characters with the
+  trigger cues intact.
+
+### Added
+
+- `scripts/check_frontmatter.py` now validates the plugin manifests against
+  that 500-character limit, for `description`, `metadata.description` and
+  every `plugins[].description`. The limit is enforced a long way from where
+  the description is written, so it belongs in the build checks rather than
+  being rediscovered in a browser.
+- `homepage` and `repository` fields in `plugin.json`.
+
 ## [1.0.0] — 2026-11-19
 
 First public release. 13 skills, 14 shared reference files, no dependencies.
